@@ -10,7 +10,7 @@ Offsets below are flash (image) offsets unless noted as *DXE+…* (offset inside
 ## Complete list of alterations (mod9 vs. vendor JYB7IG13)
 
 Changed flash areas: `0x400000–0x401FFF` (factory defaults), `0x471000–0x474FFF` (full-screen logo volume), `0x4D1000–0x80DFFF` (main DXE volume), `0xDF8000`, `0xF50000`, `0xF6B000` (one 4 KB block each, PEI code).
-**Not changed:** flash descriptor (`0x0–0xFFF`), Intel ME region (`0x1000–0x3D8FFF`, ME 16.1.25.1917 as shipped), CPU microcode, Secure Boot keys (PK/KEK/db/dbx), SMBIOS data, the rest of the BIOS region.
+**Not changed:** flash descriptor (`0x0–0xFFF`), Intel ME region (`0x1000–0x3D8FFF`, ME 16.1.25.1917 as shipped), CPU microcode (vendor 0x12F release; Raptor Lake `B0671` = rev `0x12F`, 2025-03-17), Secure Boot keys (PK/KEK/db/dbx), SMBIOS data, the rest of the BIOS region.
 
 ### 1. Restart / reset fix
 
