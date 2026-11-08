@@ -34,8 +34,7 @@ Full byte-level details: **[CHANGELOG.md](CHANGELOG.md)**. How to flash: **[INST
 
 ## Status
 
-Every step from mod1 through mod7 has been flashed and used daily on a real B760I GAMING. Restarts from Windows and from setup, the beep, the logo, CSM off, ReBAR on and the hidden options are all confirmed working.
-mod8 only differs from mod7 in the default value of the hidden System Language option (English instead of Chinese). See CHANGELOG.md.
+Every release from mod1 through mod8 has been flashed and booted on a real B760I GAMING. Confirmed working: restarts from Windows and from setup, the beep, the logo, CSM off, ReBAR on and the hidden options.
 
 ## Not affiliated
 

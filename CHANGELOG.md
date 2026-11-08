@@ -99,7 +99,7 @@ All builds 2026-11. Each step was built from the previous image; scripts are in 
 
 | Release | Changes | Tested on hardware |
 |---|---|---|
-| **mod8** | System Language defaults zh-chs → en-US (2 bytes, DXE+`0x3B98E0` / `0x3B98E7`). Matters only after *Load Defaults* on a fresh flash. | Pending (only these 2 bytes differ from mod7) |
+| **mod8** | System Language defaults zh-chs → en-US (2 bytes, DXE+`0x3B98E0` / `0x3B98E7`). Matters only after *Load Defaults* on a fresh flash. | ✅ |
 | **mod7** | Quiet Boot option hidden in place + AMITSESetupData record (§3). | ✅ |
 | **mod6** | Text-screen logo: black background instead of white. | ✅ |
 | **mod5** | POST beep (§6); 8254 clock-gate default → 2. | ✅ |
