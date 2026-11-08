@@ -3,6 +3,11 @@
 A modified version of JGINYUE's own **JYB7IG13** BIOS for the **JGINYUE B760I GAMING** (mini-ITX, LGA1700).
 It fixes the vendor's restart bug, sets better factory defaults, removes the Chinese language pack, replaces the boot-screen logo and adds a POST beep.
 
+<p align="center">
+  <a href="https://www.jginyue.com/index/Article/show/cat_id/22/id/10"><img src="https://jginyue.com/public/upload/ee/373b3b6721749302a19468aa3d241b.png" alt="JGINYUE B760I GAMING" width="480"></a><br>
+  <sub>JGINYUE B760I GAMING – image: <a href="https://www.jginyue.com/index/Article/show/cat_id/22/id/10">JGINYUE official product page</a></sub>
+</p>
+
 > [!WARNING]
 > **For the JGINYUE B760I GAMING only.** Flashing it to any other board — including the B760M Snow Dream, which uses the same AMI template — will brick that board.
 > The flash script checks the BIOS version and the flash descriptor and refuses to run on anything else.
