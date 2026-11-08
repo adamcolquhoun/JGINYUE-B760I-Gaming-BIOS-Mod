@@ -108,7 +108,7 @@ All builds 2026-11. Each step was built from the previous image; scripts are in 
 
 | Release | Changes | Tested on hardware |
 |---|---|---|
-| **mod9** | Boot beep 2 kHz → 1 kHz, counter 2 parked after the beep; AMI USB-device beeps disabled (§6). | Flashed; boot confirmation pending |
+| **mod9** | Boot beep 2 kHz → 1 kHz, counter 2 parked after the beep; AMI USB-device beeps disabled (§6). | ✅ |
 | mod8 | System Language defaults zh-chs → en-US (2 bytes, DXE+`0x3B98E0` / `0x3B98E7`). Matters only after *Load Defaults* on a fresh flash. | ✅ |
 | **mod7** | Quiet Boot option hidden in place + AMITSESetupData record (§3). | ✅ |
 | **mod6** | Text-screen logo: black background instead of white. | ✅ |

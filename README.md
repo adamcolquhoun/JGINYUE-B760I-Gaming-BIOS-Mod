@@ -34,7 +34,7 @@ Full byte-level details: **[CHANGELOG.md](CHANGELOG.md)**. How to flash: **[INST
 
 ## Status
 
-Every release from mod1 through mod8 has been flashed and booted on a real B760I GAMING; mod9 (beep changes only) is flashed and awaiting its first boot. Confirmed working: restarts from Windows and from setup, the beep, the logo, CSM off, ReBAR on and the hidden options.
+Every release from mod1 through mod9 has been flashed and booted on a real B760I GAMING. Confirmed working: restarts from Windows and from setup, the single 1 kHz boot beep (no other beeps), the logo, CSM off, ReBAR on and the hidden options.
 
 ## Not affiliated
 
