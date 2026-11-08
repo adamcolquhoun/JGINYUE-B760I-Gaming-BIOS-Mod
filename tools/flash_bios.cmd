@@ -1,5 +1,5 @@
 @echo off
-:: Flash JYB7IG13_mod8.bin to a JGINYUE B760I GAMING (vendor BIOS JYB7IG13 + the changes in CHANGELOG.md).
+:: Flash JYB7IG13_mod9.bin to a JGINYUE B760I GAMING (vendor BIOS JYB7IG13 + the changes in CHANGELOG.md).
 :: ONLY for the B760I GAMING. The script refuses to run on any other board.
 :: Needs FPTW64.exe (from JGINYUE's own BIOS package) in this folder. Run as Administrator.
 :: Do not interrupt or power off once writing starts.
@@ -8,8 +8,8 @@ cd /d "%~dp0"
 net session >nul 2>&1 || (echo Run this as Administrator. & pause & exit /b 1)
 if not exist FPTW64.exe (echo FPTW64.exe not found - copy it here from the vendor BIOS package. See INSTALL.md. & pause & exit /b 1)
 
-set IMG=..\firmware\JYB7IG13_mod8.bin
-set EXPECT=60dd920842c96d7d1d46fe33d3f375767f7cec560d682efea3f13d57b1cab9ed
+set IMG=..\firmware\JYB7IG13_mod9.bin
+set EXPECT=6044b57613a2066ed8dbf8a3d44a4b1c2a87fe46cc9bc310f9b06f9c612d1638
 
 echo === Check 1: image integrity ===
 if not exist %IMG% (echo %IMG% not found - NOT flashing. & pause & exit /b 1)

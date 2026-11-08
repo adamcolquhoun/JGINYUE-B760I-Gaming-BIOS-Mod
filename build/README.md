@@ -10,6 +10,7 @@ These are the scripts that produced each release step, kept so every change can 
 | `build_b760i_mod6.py` | mod5 → mod6 (black-background text-screen logo `assets/text_screen_logo.bmp`) |
 | `build_b760i_mod7.py` | mod6 → mod7 (Quiet Boot hidden in place) – uses `quietboot.py` |
 | `build_b760i_mod8.py` | mod7 → mod8 (System Language defaults → English) |
+| `build_beep_v2.py` (+ `beep_v2.py`) | mod8 → mod9. Beep v2: rewrites the stub in place (1 kHz, counter 2 parked) and disables the AMI USB-device beeps. `python build_beep_v2.py <b760i|snowdream> in.bin out.bin workdir`. Note: `beep.s`/`beep.bin` are now v2; the older scripts were built with the v1 stub (see git history). |
 
 Requirements: Python 3.10+, the 7-Zip **LZMA SDK** `lzma.exe` encoder (`set LZMA_EXE=…\lzma_sdk\bin\x64\lzma.exe`), and for mod3–mod5 an extraction of the vendor image (UEFITool/UEFIExtract-style folder tree) in `EXTRACTED_BIOS`.
 

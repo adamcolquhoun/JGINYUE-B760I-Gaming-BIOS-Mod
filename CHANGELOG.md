@@ -1,13 +1,13 @@
 # Changelog – JGINYUE B760I GAMING modded BIOS
 
 Base image: JGINYUE **JYB7IG13** `BIOS.rom` (16 MiB full chip), SHA-256 `b04d9453812f3aca516f28f628672ae4bde5671558ab7971ffbd6542928180bd`.
-Current release: **mod8** – `firmware/JYB7IG13_mod8.bin`, SHA-256 `60dd920842c96d7d1d46fe33d3f375767f7cec560d682efea3f13d57b1cab9ed`.
+Current release: **mod9** – `firmware/JYB7IG13_mod9.bin`, SHA-256 `6044b57613a2066ed8dbf8a3d44a4b1c2a87fe46cc9bc310f9b06f9c612d1638`.
 
 Offsets below are flash (image) offsets unless noted as *DXE+…* (offset inside the decompressed main DXE firmware volume, which is LZMA-compressed in FFS file `9E21FD93-9C72-4C15-8C4B-E77F1DB2D792` at flash `0x4D10C0`) or *module+…* (offset inside that PE/TE module).
 
 ---
 
-## Complete list of alterations (mod8 vs. vendor JYB7IG13)
+## Complete list of alterations (mod9 vs. vendor JYB7IG13)
 
 Changed flash areas: `0x400000–0x401FFF` (factory defaults), `0x471000–0x474FFF` (full-screen logo volume), `0x4D1000–0x80DFFF` (main DXE volume), `0xDF8000`, `0xF50000`, `0xF6B000` (one 4 KB block each, PEI code).
 **Not changed:** flash descriptor (`0x0–0xFFF`), Intel ME region (`0x1000–0x3D8FFF`, ME 16.1.25.1917 as shipped), CPU microcode, Secure Boot keys (PK/KEK/db/dbx), SMBIOS data, the rest of the BIOS region.
@@ -78,14 +78,23 @@ Setup is English-only. The language list entry and AMITSE's own small zh-chs pac
 
 ### 6. POST beep
 
-A 103-byte routine (`build/beep.s`) was placed in unused space at the end of the `.text` section of **CapsuleRuntimeDxe** (RVA `0x1C70`, raw zero padding). The module's entry point was redirected to it (`AddressOfEntryPoint 0x1124 → 0x1C70`, `.text VirtualSize 0xC6F → 0xCD7`). It:
+A 115-byte routine (`build/beep.s`) was placed in unused space at the end of the `.text` section of **CapsuleRuntimeDxe** (RVA `0x1C70`, raw zero padding). The module's entry point was redirected to it (`AddressOfEntryPoint 0x1124 → 0x1C70`, `.text VirtualSize 0xC6F → 0xCE3`). It:
 
 1. reads the CPU base frequency from `CPUID 0x16` (falls back to 2500 MHz);
-2. programs 8254 counter 2 for a square wave with divisor `0x254` (≈ 2,002 Hz) and sets bits 0–1 of port `0x61` (speaker on);
+2. programs 8254 counter 2 for a square wave with divisor `0x4A9` (≈ 1,000 Hz) and sets bits 0–1 of port `0x61` (speaker on);
 3. waits ≈ 0.5 s using the TSC;
-4. switches the speaker off and jumps to the original entry point.
+4. switches the speaker off, **parks counter 2** (mode 0, one-shot) so it stops oscillating – a later write that re-enables the speaker can no longer produce a stray tone – and jumps to the original entry point.
 
 It makes no calls and writes no memory except the stack. It needs a speaker on the SPEAKER header and the 8254 clock-gate default from §2.
+
+**USB device beeps disabled.** The vendor's AMI USB driver beeps (8 short high beeps) for every USB device it enumerates during POST. Its beep routine exists in two modules:
+
+| Module | FFS GUID | Change |
+|---|---|---|
+| UsbRtDxe | `171F43DC-C4D9-47A6-9641-65DDCDD5AA30` | module+`0xBABF`: `je` → `jmp` (`74` → `EB`) |
+| UsbRtSmm (SMM) | `04EAAAA1-29A1-11D7-8838-00500473D4EB` | module+`0xD041`: `je` → `jmp` (`74` → `EB`) |
+
+In both, the routine starts with `test dword [rax+6C9h], 200000h` / `je skip`; making that jump unconditional means it never touches the speaker. AMI's StatusCode beeps are **left alone**: its progress-code beep table is empty, so it only beeps on error codes (e.g. memory or video failures), which remain useful for diagnosis.
 
 ### 7. Recompression
 
@@ -99,7 +108,8 @@ All builds 2026-11. Each step was built from the previous image; scripts are in 
 
 | Release | Changes | Tested on hardware |
 |---|---|---|
-| **mod8** | System Language defaults zh-chs → en-US (2 bytes, DXE+`0x3B98E0` / `0x3B98E7`). Matters only after *Load Defaults* on a fresh flash. | ✅ |
+| **mod9** | Boot beep 2 kHz → 1 kHz, counter 2 parked after the beep; AMI USB-device beeps disabled (§6). | Flashed; boot confirmation pending |
+| mod8 | System Language defaults zh-chs → en-US (2 bytes, DXE+`0x3B98E0` / `0x3B98E7`). Matters only after *Load Defaults* on a fresh flash. | ✅ |
 | **mod7** | Quiet Boot option hidden in place + AMITSESetupData record (§3). | ✅ |
 | **mod6** | Text-screen logo: black background instead of white. | ✅ |
 | **mod5** | POST beep (§6); 8254 clock-gate default → 2. | ✅ |

@@ -28,10 +28,10 @@
 3. Optional: check the image hash yourself in PowerShell:
 
    ```powershell
-   Get-FileHash .\firmware\JYB7IG13_mod8.bin -Algorithm SHA256
+   Get-FileHash .\firmware\JYB7IG13_mod9.bin -Algorithm SHA256
    ```
 
-   It must be `60DD920842C96D7D1D46FE33D3F375767F7CEC560D682EFEA3F13D57B1CAB9ED`. The script checks this too.
+   It must be `6044B57613A2066ED8DBF8A3D44A4B1C2A87FE46CC9BC310F9B06F9C612D1638`. The script checks this too.
 
 ## Step 2 – Flash
 
@@ -85,7 +85,7 @@ Do not run the ME update in the same Windows session as the BIOS flash. Skipping
 From an admin prompt in `tools\`:
 
 ```bat
-FPTW64.exe -verify ..\firmware\JYB7IG13_mod8.bin
+FPTW64.exe -verify ..\firmware\JYB7IG13_mod9.bin
 ```
 
 Only the NVRAM area (your settings, which change as you use the PC) and possibly the ME data area should differ.
